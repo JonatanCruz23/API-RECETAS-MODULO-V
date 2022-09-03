@@ -7,6 +7,9 @@ export class CreateRecetaDto {
     @ApiProperty()
     descripcion?: string;
 
+    @ApiProperty()
+    portada?: string;
+
     @ApiProperty({ type: [CreateIngredienteDto] })
     ingredientes: CreateIngredienteDto[];
     
