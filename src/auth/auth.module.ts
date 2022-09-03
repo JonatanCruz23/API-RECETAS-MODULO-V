@@ -13,7 +13,7 @@ import configuration from 'src/config/configuration';
 @Module({
   imports: [UsuarioModule, PassportModule, JwtModule.register({
     secret: configuration.internal_auth.jwt.scret_key,
-    signOptions: { expiresIn: '5m' },
+    signOptions: { expiresIn: configuration.internal_auth.jwt.expires_time},
   }), MongooseModule.forFeature([{ name: "usuario", schema: UsuarioSchema }])],
   providers: [AuthService, UsuarioService, LocalStrategy, JwtStrategy],
   controllers: [AuthController],

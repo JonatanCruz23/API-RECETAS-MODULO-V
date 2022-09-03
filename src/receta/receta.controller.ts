@@ -1,8 +1,10 @@
-import { Controller, Get, Post, Body, Param, Delete, Put } from '@nestjs/common';
+import { Controller, UseGuards, Get, Post, Body, Param, Delete, Put } from '@nestjs/common';
 import { RecetaService } from './receta.service';
 import { CreateRecetaDto } from './dto/create-receta.dto';
 import { UpdateRecetaDto } from './dto/update-receta.dto';
+import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
 
+@UseGuards(JwtAuthGuard)
 @Controller('receta')
 export class RecetaController {
   constructor(private readonly recetaService: RecetaService) {}

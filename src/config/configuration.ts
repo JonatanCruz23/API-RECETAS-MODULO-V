@@ -8,7 +8,8 @@ export default {
 
     internal_auth: {
         jwt: {
-            scret_key: process.env.JWT_SECRET_KEY || ""
+            scret_key: process.env.JWT_SECRET_KEY || "",
+            expires_time: process.env.JWT_EXPIRES_TIME || "5m"
         }
     },
     mongo: {
