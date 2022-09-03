@@ -1,4 +1,8 @@
+import { ApiProperty } from '@nestjs/swagger';
 export class CreateIngredienteDto {
-    nombre:   string;
+    @ApiProperty()
+    nombre: string;
+
+    @ApiProperty()
     cantidad: string;
 }

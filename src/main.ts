@@ -8,15 +8,23 @@ async function bootstrap() {
   const port = configuration.port;
 
   // Swagger
-  const swaggerConfig = new DocumentBuilder()
+  const configDocument = new DocumentBuilder()
   .setTitle('API Recetas')
+  .addBearerAuth({
+    type: 'http',
+    scheme: 'bearer',
+    bearerFormat: 'JWT',
+    name: 'JWT',
+    description: 'Enter JWT token',
+    in: 'header',
+  }, 'JWT-auth')
   .setDescription('Request collections')
   .setVersion('1.0')
-  .addTag('Recetas')
+  .addTag('Colección de recetas (Endpoints)')
   .build();
-  
-  const swaggerDocument = SwaggerModule.createDocument(app, swaggerConfig);
-  SwaggerModule.setup('api', app, swaggerDocument);
+
+  const document = SwaggerModule.createDocument(app, configDocument);
+  SwaggerModule.setup('api', app, document);
 
   await app.listen(port, () => {
     console.log(`Server listen on port ${port}`);
