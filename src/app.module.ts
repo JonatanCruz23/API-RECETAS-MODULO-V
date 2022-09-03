@@ -7,7 +7,7 @@ import { UsuarioModule } from './usuario/usuario.module';
 import { AuthModule } from './auth/auth.module';
 
 @Module({
-  imports: [ConfigModule.forRoot(), MongooseModule.forRoot('mongodb+srv://adminmoduloiii:soloyo123@moduloiii.gyrzj.mongodb.net/?retryWrites=true&w=majority'), UsuarioModule, AuthModule],
+  imports: [ConfigModule.forRoot(), MongooseModule.forRoot(process.env.MONGO_DB), UsuarioModule, AuthModule],
   controllers: [AppController],
   providers: [AppService],
 })
