@@ -5,21 +5,17 @@ import { LocalAuthGuard } from './guards/local-auth.guard';
 
 @Controller()
 export class AuthController {
-    constructor(private authService: AuthService) {
-        
-     }
+    constructor(private authService: AuthService) {}
 
-   @UseGuards(LocalAuthGuard)
-    @Post('auth/login') // login requiere un json { "usuario":"Administrador2", "clave":"123456" }
+    @UseGuards(LocalAuthGuard)
+    @Post('auth/login')
     async login(@Request() req) {
-        //req lleva todos los datos del request por lo tanto se extrae lo que va en el body
         return this.authService.login(req.body); 
     }
 
-    //Aseguramos la ruta
-    @UseGuards(JwtAuthGuard) //hay que enviar el token
+    @UseGuards(JwtAuthGuard)
     @Get('secreto')
     secreto(@Request() req) {
-        return { mensaje:"Usuario autenticado" };
+        return { mensaje: "Usuario autenticado" };
     }
 }

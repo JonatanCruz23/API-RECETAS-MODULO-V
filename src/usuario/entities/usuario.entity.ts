@@ -7,11 +7,27 @@ export type UserDocument = Usuario & Document;
 export class Usuario {
   
   _id: mongoose.Types.ObjectId;
+  
   @Prop()
   usuario: string;
 
   @Prop()
   clave: string;
+  
+  @Prop()
+  email: string;
+  
+  @Prop({
+    type: String,
+    default: "comercial"
+  })
+  rol;
+  
+  @Prop({
+    type: Boolean,
+    default: true
+  })
+  activado;
 }
 
 export const UsuarioSchema = SchemaFactory.createForClass(Usuario);

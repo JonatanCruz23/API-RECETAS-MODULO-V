@@ -1,6 +1,7 @@
 export class CreateUsuarioDto {
-
-    usuario:string;
-    clave:string;
-
+    email?: string;
+    usuario: string;
+    clave: string;
+    rol?: string;
+    activado?: boolean;  
 }
