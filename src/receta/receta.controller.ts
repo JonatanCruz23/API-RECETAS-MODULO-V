@@ -1,9 +1,12 @@
 import { Controller, UseGuards, Get, Post, Body, Param, Delete, Put } from '@nestjs/common';
+import { ApiTags, ApiBearerAuth } from '@nestjs/swagger';
 import { RecetaService } from './receta.service';
 import { CreateRecetaDto } from './dto/create-receta.dto';
 import { UpdateRecetaDto } from './dto/update-receta.dto';
 import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
 
+@ApiTags("Receta")
+@ApiBearerAuth("JWT_AUTH")
 @UseGuards(JwtAuthGuard)
 @Controller('receta')
 export class RecetaController {
