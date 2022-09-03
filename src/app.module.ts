@@ -4,6 +4,7 @@ import { ConfigModule } from '@nestjs/config'
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { IngredienteModule } from './ingrediente/ingrediente.module';
+import { RecetaModule } from './receta/receta.module';
 import { UsuarioModule } from './usuario/usuario.module';
 import { AuthModule } from './auth/auth.module';
 
@@ -13,7 +14,8 @@ import { AuthModule } from './auth/auth.module';
     MongooseModule.forRoot(process.env.MONGO_DB), 
     UsuarioModule, 
     AuthModule,
-    IngredienteModule
+    IngredienteModule,
+    RecetaModule
   ],
   controllers: [AppController],
   providers: [AppService],
