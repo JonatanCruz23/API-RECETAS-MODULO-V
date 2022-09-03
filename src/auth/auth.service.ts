@@ -13,13 +13,13 @@ export class AuthService {
         const usuario:Usuario = await this.usersService.getUserByEmail(usuarioDTO.usuario);
         
         if (!usuario) return   new NotAcceptableException('No existe el usuario indicado');
-        const validarPassword = await bcrypt.compare(usuarioDTO.clave, usuario.clave)
+        const validarPassword = await bcrypt.compare(usuarioDTO.clave, usuario.clave);
         if (usuario && validarPassword) {
             const payload = { usuario: usuario.usuario, id: usuario._id };
             return {
                 access_token: this.jwtService.sign(payload),
             };
         }
-        return false
+        return false;
     }
 }
