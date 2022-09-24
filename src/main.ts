@@ -5,11 +5,12 @@ import { AppModule } from './app.module';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
+  app.enableCors();
   const port = configuration.port;
 
   // Swagger
   const configDocument = new DocumentBuilder()
-  .setTitle('API Recetas')
+  .setTitle('API Receta')
   .addBearerAuth({
     type: 'http',
     scheme: 'bearer',
