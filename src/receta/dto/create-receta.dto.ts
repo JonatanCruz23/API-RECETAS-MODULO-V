@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { CreateIngredienteDto } from "./create-ingrediente.dto";
+import { CreateIngredienteDto } from 'src/ingrediente/dto/create-ingrediente.dto';
 import { CreatePasoDto } from 'src/paso/dto/create-paso.dto';
 export class CreateRecetaDto {
     @ApiProperty({ example: "Pupusas revueltas" })

@@ -23,16 +23,16 @@ export class PasoController {
     }
   
     @ApiBody({type:UpdatePasoDto})
-    @Put(':id/paso/:idStep')
-    async updateStep(@Param('id') id: string, @Param('idStep') idStep: string, @Body() paso: UpdatePasoDto) {
-      return this.pasoService.updateStep(id, idStep, paso);
+    @Put(':id/paso/:idPaso')
+    async updateStep(@Param('id') id: string, @Param('idPaso') idPaso: string, @Body() paso: UpdatePasoDto) {
+      return this.pasoService.updateStep(id, idPaso, paso);
     }
   
-    @Delete(':id/paso/:idStep')
+    @Delete(':id/paso/:idPaso')
     async deleteStep(
       @Param('id') id: string,
-      @Param('idStep') idStep: string,
+      @Param('idPaso') idPaso: string,
     ) {
-      return this.pasoService.deleteStep(id, idStep);
+      return this.pasoService.deleteStep(id, idPaso);
     }
 }

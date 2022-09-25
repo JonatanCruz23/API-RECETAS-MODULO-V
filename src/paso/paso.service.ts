@@ -16,21 +16,21 @@ export class PasoService {
         return recetas;
     }
     
-    async deleteStep(_id: string, idStep: string): Promise<Receta> {
-      const recetas = await this.recetaModel.findOneAndUpdate({_id}, {
+    async deleteStep(_id: string, idPaso: string): Promise<Receta> {
+      const recetas = await this.recetaModel.updateOne({_id}, {
         $pull: {
           pasos:{
-            _id: idStep
+            _id: idPaso
           }
         }
       });
-      return recetas;
+      return await this.recetaModel.findById(_id);
     }
 
-    async updateStep(_id: string, idStep: string, updatePasoDto: UpdatePasoDto): Promise<Receta> {
-      const recetas = await this.recetaModel.updateOne({ _id, "pasos._id": idStep}, {
+    async updateStep(_id: string, idPaso: string, updatePasoDto: UpdatePasoDto): Promise<Receta> {
+      const recetas = await this.recetaModel.updateOne({ _id, "pasos._id": idPaso}, {
         $set: { 
-          "pasos.$._id": idStep,
+          "pasos.$._id": idPaso,
           "pasos.$.numero": updatePasoDto.numero,
           "pasos.$.descripcion": updatePasoDto.descripcion
         }

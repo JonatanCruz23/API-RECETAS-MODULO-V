@@ -1,4 +1,4 @@
-import { Ingrediente } from "./ingrediente.interface";
+import { Ingrediente } from "src/ingrediente/interfaces/ingrediente.interface";
 import { Paso } from "src/paso/interfaces/paso.interface";
 export interface Receta {
     nombre: string;

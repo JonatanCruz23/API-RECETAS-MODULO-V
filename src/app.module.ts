@@ -6,6 +6,7 @@ import { RecetaModule } from './receta/receta.module';
 import { UsuarioModule } from './usuario/usuario.module';
 import { AuthModule } from './auth/auth.module';
 import { PasoModule } from './paso/paso.module';
+import { IngredienteModule } from './ingrediente/ingrediente.module';
 import configuration from 'src/config/configuration';
 
 @Module({
@@ -14,7 +15,8 @@ import configuration from 'src/config/configuration';
     UsuarioModule, 
     AuthModule,
     RecetaModule,
-    PasoModule
+    PasoModule,
+    IngredienteModule
   ],
   controllers: [AppController],
   providers: [AppService],
