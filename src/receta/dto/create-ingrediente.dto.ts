@@ -6,6 +6,6 @@ export class CreateIngredienteDto {
     @ApiProperty({ example: 1 })
     cantidad: number;
 
-    @ApiProperty({ example: "Una cucharada" })
+    @ApiProperty({ example: "Cucharada" })
     unidad: string;
 }
