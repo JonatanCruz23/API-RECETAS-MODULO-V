@@ -1,6 +1,7 @@
 
 import { Schema } from 'mongoose';
 import { IngredienteSchema } from './ingrediente.entity'
+import { PasoSchema } from './paso.entity';
 
 export const RecetaSchema = new Schema({
     nombre: String,
@@ -10,6 +11,7 @@ export const RecetaSchema = new Schema({
         default: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSmVtYubQj2BXuEY5SkfIoS434pOJbEcsa28Q",
     },
     ingredientes: [IngredienteSchema],
+    pasos: [PasoSchema],
     estado: {
         type: Boolean,
         default: true
