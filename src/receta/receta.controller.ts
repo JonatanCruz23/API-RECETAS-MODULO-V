@@ -4,7 +4,6 @@ import { RecetaService } from './receta.service';
 import { CreateRecetaDto } from './dto/create-receta.dto';
 import { UpdateRecetaDto } from './dto/update-receta.dto';
 import { CreateIngredienteDto } from './dto/create-ingrediente.dto';
-import { CreatePasoDto } from './dto/create-paso.dto';
 import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
 
 @ApiTags("Receta")
@@ -53,16 +52,5 @@ export class RecetaController {
     @Body() ingrediente: CreateIngredienteDto,
   ) {
     return this.recetaService.createIngredient(id, ingrediente);
-  }
-
-  @ApiBearerAuth('JWT-auth')
-  @UseGuards(JwtAuthGuard)
-  @ApiBody({type:CreatePasoDto})
-  @Post(':id/paso')
-  async createStep(
-    @Param('id') id: string,
-    @Body() paso: CreatePasoDto,
-  ) {
-    return this.recetaService.createStep(id, paso);
   }
 }

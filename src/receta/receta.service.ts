@@ -4,7 +4,6 @@ import { Model } from 'mongoose';
 import { CreateRecetaDto } from './dto/create-receta.dto';
 import { UpdateRecetaDto } from './dto/update-receta.dto';
 import { CreateIngredienteDto } from './dto/create-ingrediente.dto';
-import { CreatePasoDto } from './dto/create-paso.dto';
 import { Receta } from './interfaces/receta.interface';
 
 @Injectable()
@@ -28,26 +27,24 @@ export class RecetaService {
   }
 
   async update(id: string, updateRecetaDto: UpdateRecetaDto): Promise<Receta> {
-    const usuario = await this.recetaModel.findByIdAndUpdate(id, updateRecetaDto, { new: true });
-    return usuario;
+    const recetas = await this.recetaModel.findByIdAndUpdate(id, updateRecetaDto, { 
+      new: true 
+    });
+    return recetas;
   }
 
   async remove(id: string): Promise<Receta> {
-    const usuario = await this.recetaModel.findByIdAndRemove(id);
-    return usuario;
+    const recetas = await this.recetaModel.findByIdAndRemove(id);
+    return recetas;
   }
-
+  // ================= Ingredients Start ========================
+  
   async createIngredient(id: string, createIngredienteDto: CreateIngredienteDto): Promise<Receta> {
-    const usuario = await this.recetaModel.findByIdAndRemove(id);
-    usuario.ingredientes.push(createIngredienteDto);
-    usuario.save();
-    return usuario;
+    const recetas = await this.recetaModel.findById(id);
+    recetas.ingredientes.push(createIngredienteDto);
+    recetas.save();
+    return recetas;
   }
 
-  async createStep(id: string, createPasoDto: CreatePasoDto): Promise<Receta> {
-    const usuario = await this.recetaModel.findByIdAndRemove(id);
-    usuario.pasos.push(createPasoDto);
-    usuario.save();
-    return usuario;
-  }
+  // ================= Ingredients End ========================
 }

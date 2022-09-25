@@ -5,10 +5,13 @@ import { AppModule } from './app.module';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
+  // Allowing http conections
   app.enableCors();
+
+  // Defined Port from enviroment vars
   const port = configuration.port;
 
-  // Swagger
+  // Swagger confifuration
   const configDocument = new DocumentBuilder()
   .setTitle('API Receta')
   .addBearerAuth({
@@ -24,9 +27,11 @@ async function bootstrap() {
   .addTag('Colección de recetas (Endpoints)')
   .build();
 
+  // Creating swagger document
   const document = SwaggerModule.createDocument(app, configDocument);
   SwaggerModule.setup('api', app, document);
 
+  // Express listen on defined port
   await app.listen(port, () => {
     console.log(`Server listen on port ${port}`);
   });

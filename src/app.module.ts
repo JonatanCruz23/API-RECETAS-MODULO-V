@@ -5,6 +5,7 @@ import { AppService } from './app.service';
 import { RecetaModule } from './receta/receta.module';
 import { UsuarioModule } from './usuario/usuario.module';
 import { AuthModule } from './auth/auth.module';
+import { PasoModule } from './paso/paso.module';
 import configuration from 'src/config/configuration';
 
 @Module({
@@ -12,7 +13,8 @@ import configuration from 'src/config/configuration';
     MongooseModule.forRoot(configuration.mongo.conection), 
     UsuarioModule, 
     AuthModule,
-    RecetaModule
+    RecetaModule,
+    PasoModule
   ],
   controllers: [AppController],
   providers: [AppService],
