@@ -1,17 +1,17 @@
 import { ApiProperty } from '@nestjs/swagger';
 export class CreateUsuarioDto {
-    @ApiProperty()
+    @ApiProperty({ example: "esau@gmail.com" })
     email?: string;
 
-    @ApiProperty()
+    @ApiProperty({ example: "esaug" })
     usuario: string;
 
-    @ApiProperty()
+    @ApiProperty({ example: "123456" })
     clave: string;
     
-    @ApiProperty()
+    @ApiProperty({ example: "admin" })
     rol?: string;
     
-    @ApiProperty()
-    activado?: boolean;  
+    @ApiProperty({ example: true })
+    activado?: boolean;
 }
