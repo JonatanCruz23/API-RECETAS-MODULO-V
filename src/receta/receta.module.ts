@@ -3,7 +3,7 @@ import { RecetaService } from './receta.service';
 import { RecetaController } from './receta.controller';
 import { MongooseModule } from '@nestjs/mongoose';
 import { RecetaSchema } from './entities/receta.entity';
-import { IngredienteSchema } from '../ingrediente/entities/ingrediente.entity';
+import { IngredienteSchema } from './entities/ingrediente.entity';
 
 
 

@@ -1,6 +1,6 @@
 
 import { Schema } from 'mongoose';
-import { IngredienteSchema } from '../../ingrediente/entities/ingrediente.entity'
+import { IngredienteSchema } from './ingrediente.entity'
 
 export const RecetaSchema = new Schema({
     nombre: String,

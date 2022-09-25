@@ -1,21 +1,21 @@
-import { CreateIngredienteDto } from "src/ingrediente/dto/create-ingrediente.dto";
+import { CreateIngredienteDto } from "./create-ingrediente.dto";
 import { ApiProperty } from '@nestjs/swagger';
 export class CreateRecetaDto {
-    @ApiProperty()
+    @ApiProperty({ example: "Pupusas revueltas" })
     nombre: string;
 
-    @ApiProperty()
+    @ApiProperty({ example: "Platillo tipico de El salvador" })
     descripcion?: string;
 
-    @ApiProperty()
+    @ApiProperty({ example: "https://www.recetassalvador.com/base/stock/Recipe/32-image/32-image_web.jpg" })
     portada?: string;
 
     @ApiProperty({ type: [CreateIngredienteDto] })
     ingredientes: CreateIngredienteDto[];
     
-    @ApiProperty()
+    @ApiProperty({ example: true })
     estado?: Boolean;
     
-    @ApiProperty()
+    @ApiProperty({ example: "1" })
     IdUsuario: string;
 }
