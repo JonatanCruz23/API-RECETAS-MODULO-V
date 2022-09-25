@@ -8,7 +8,7 @@ import { UpdatePasoDto } from './dto/update-paso.dto';
 @ApiTags("Receta - Paso")
 @ApiBearerAuth('JWT-auth')
 @UseGuards(JwtAuthGuard)
-@Controller('paso')
+@Controller('receta')
 export class PasoController {
 
     constructor(private readonly pasoService: PasoService) {}

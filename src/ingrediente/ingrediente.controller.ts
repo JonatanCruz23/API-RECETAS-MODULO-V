@@ -8,7 +8,7 @@ import { UpdateIngredienteDto } from './dto/update-ingrediente.dto';
 @ApiTags("Receta - Ingrediente")
 @ApiBearerAuth('JWT-auth')
 @UseGuards(JwtAuthGuard)
-@Controller('ingrediente')
+@Controller('receta')
 export class IngredienteController {
     constructor(private readonly ingredienteService: IngredienteService) {}
 
