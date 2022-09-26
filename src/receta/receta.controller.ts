@@ -1,8 +1,10 @@
-import { Controller, UseGuards, Get, Post, Body, Param, Delete, Put } from '@nestjs/common';
-import { ApiTags, ApiBearerAuth, ApiQuery, ApiBody } from '@nestjs/swagger';
+import { Controller, UseGuards, Get, Post, Body, Param, Delete, Put, UseInterceptors, UploadedFile, UsePipes, ValidationPipe } from '@nestjs/common';
+import { ApiTags, ApiBearerAuth, ApiBody, ApiConsumes } from '@nestjs/swagger';
+import { FileInterceptor } from '@nestjs/platform-express';
 import { RecetaService } from './receta.service';
 import { CreateRecetaDto } from './dto/create-receta.dto';
 import { UpdateRecetaDto } from './dto/update-receta.dto';
+import { FileUploadDto } from './dto/upload-image-receta.dto';
 import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
 
 @ApiTags("Receta")
@@ -40,5 +42,14 @@ export class RecetaController {
   @Delete(':id')
   remove(@Param('id') id: string) {
     return this.recetaService.remove(id);
+  }
+
+  @Post(':id/upload')
+  @UseInterceptors(FileInterceptor('image'))
+  @ApiConsumes('multipart/form-data')
+  @ApiBody({type: FileUploadDto})
+  uploadImage(@Param('id') id: string, @UploadedFile() image: Express.Multer.File) {
+    //console.log(image);
+    return this.recetaService.uploadImage(id, image);
   }
 }

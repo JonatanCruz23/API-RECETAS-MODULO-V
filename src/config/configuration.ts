@@ -14,6 +14,14 @@ export default {
     },
     mongo: {
         conection: process.env.MONGO_DB || ""
+    },
+    google: {
+        credentials: process.env.APP_GOOGLE_CREDENTIALS || '{}',
+        cloud_storage: {
+            buckets: {
+                portadas_recetas: process.env.GCP_BUCKET_NAME || ""
+            }
+        }
     }
 };
   

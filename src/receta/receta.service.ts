@@ -4,11 +4,15 @@ import { Model } from 'mongoose';
 import { CreateRecetaDto } from './dto/create-receta.dto';
 import { UpdateRecetaDto } from './dto/update-receta.dto';
 import { Receta } from './interfaces/receta.interface';
+import { CloudstorageService } from 'src/cloudstorage/cloudstorage.service';
 
 @Injectable()
 export class RecetaService {
 
-  constructor(@InjectModel('Receta') private recetaModel: Model<Receta>){}
+  constructor(
+    @InjectModel('Receta') private recetaModel: Model<Receta>,
+    private cloudstorageService: CloudstorageService
+  ){}
 
   async create(createRecetaDto: CreateRecetaDto) {
     const createReceta = new this.recetaModel(createRecetaDto);
@@ -34,6 +38,16 @@ export class RecetaService {
 
   async remove(id: string): Promise<Receta> {
     const recetas = await this.recetaModel.findByIdAndRemove(id);
+    return recetas;
+  }
+
+  async uploadImage(id: string, image: Express.Multer.File): Promise<Receta> {
+    const imageUrl = await this.cloudstorageService.uploadPresciptionImage(image);
+    if(!imageUrl) throw "Error al subir la imagen";
+
+    const recetas = await this.recetaModel.findByIdAndUpdate(id, { portada: imageUrl }, { 
+      new: true 
+    });
     return recetas;
   }
 }
