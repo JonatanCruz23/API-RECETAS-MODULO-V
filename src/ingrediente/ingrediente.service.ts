@@ -17,25 +17,25 @@ export class IngredienteService {
   }
 
   async deleteIngredient(_id: string, idIngrediente: string): Promise<Receta> {
-    const recetas = await this.recetaModel.updateOne({_id}, {
+    const recetas = await this.recetaModel.findOneAndUpdate({_id}, {
       $pull: {
         ingredientes:{
           _id: idIngrediente
         }
       }
-    });
-    return await this.recetaModel.findById(_id);
+    }, { new: true });
+    return recetas;
   }
 
   async updateIngredient(_id: string, idIngrediente: string, updateIngredienteDto: UpdateIngredienteDto): Promise<Receta> {
-    const recetas = await this.recetaModel.updateOne({ _id, "ingredientes._id": idIngrediente}, {
+    const recetas = await this.recetaModel.findOneAndUpdate({ _id, "ingredientes._id": idIngrediente}, {
       $set: { 
         "ingredientes.$._id": idIngrediente,
         "ingredientes.$.nombre": updateIngredienteDto.nombre,
         "ingredientes.$.cantidad": updateIngredienteDto.cantidad,
         "ingredientes.$.unidad": updateIngredienteDto.unidad
       }
-    });
-    return await this.recetaModel.findById(_id);
+    }, { new: true });
+    return recetas;
   }
 }
