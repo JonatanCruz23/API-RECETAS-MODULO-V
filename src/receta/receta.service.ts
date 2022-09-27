@@ -42,9 +42,17 @@ export class RecetaService {
   }
 
   async uploadImage(id: string, image: Express.Multer.File): Promise<Receta> {
+    const receta = await this.recetaModel.findById(id);
+    if(!receta) throw "El id no pertenece a una receta";
+
+    // Delete existing image
+    await this.cloudstorageService.deleteFile(receta.portada);
+
+    // Uploading new image
     const imageUrl = await this.cloudstorageService.uploadPresciptionImage(id, image);
     if(!imageUrl) throw "Error al subir la imagen";
 
+    // Updating url image
     const recetas = await this.recetaModel.findByIdAndUpdate(id, { portada: imageUrl }, { 
       new: true 
     });
