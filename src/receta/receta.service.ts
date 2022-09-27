@@ -42,7 +42,7 @@ export class RecetaService {
   }
 
   async uploadImage(id: string, image: Express.Multer.File): Promise<Receta> {
-    const imageUrl = await this.cloudstorageService.uploadPresciptionImage(image);
+    const imageUrl = await this.cloudstorageService.uploadPresciptionImage(id, image);
     if(!imageUrl) throw "Error al subir la imagen";
 
     const recetas = await this.recetaModel.findByIdAndUpdate(id, { portada: imageUrl }, { 

@@ -1,20 +1,25 @@
 import { Injectable } from '@nestjs/common';
 import { Storage } from '@google-cloud/storage';
+import * as path from 'path';
 import configuration from 'src/config/configuration';
 
 const storage = new Storage({ 
   credentials: JSON.parse(configuration.google.credentials)
 });
 const bucket = storage.bucket(configuration.google.cloud_storage.buckets.portadas_recetas);
-const pathPortada = 'imagenes/portada/';
+let pathReceta = 'imagenes/receta/';
 
 @Injectable()
 export class CloudstorageService {
 
-  async uploadPresciptionImage(image: Express.Multer.File): Promise<string | null> {
+  async uploadPresciptionImage(id, image: Express.Multer.File): Promise<string | null> {
     return new Promise((resol, reject) => {
       try {
-        const blob = bucket.file(pathPortada + image.originalname);
+        pathReceta += id;
+        let imageExtencion = path.extname(image.originalname);
+        let imageName = `porta${imageExtencion}`;
+
+        const blob = bucket.file(`${pathReceta}/${imageName}`);
         const blobStream = blob.createWriteStream({
           resumable: false
         }).end(image.buffer);
@@ -27,10 +32,10 @@ export class CloudstorageService {
     
         blobStream.on("error", (err) => {
           console.log(`Error to upload image: ${err}`);
-          reject(null);
+          resol(null);
         });
       } catch (error) {
-        return null;
+        resol(null);
       }
     });
   }
