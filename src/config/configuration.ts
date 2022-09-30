@@ -18,7 +18,7 @@ export default {
     google: {
         credentials: process.env.APP_GOOGLE_CREDENTIALS || '{}',
         cloud_storage: {
-            host: process.env.GCP_CLOUD_STORAGE_HOST || "https://storage.cloud.google.com/",
+            host: process.env.GCP_CLOUD_STORAGE_HOST || "https://storage.googleapis.com/",
             buckets: {
                 portadas_recetas: process.env.GCP_BUCKET_NAME || ""
             }
